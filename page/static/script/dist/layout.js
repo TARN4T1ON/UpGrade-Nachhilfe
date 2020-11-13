@@ -28,7 +28,7 @@ class layout {
     constructor() {
         this.elements = {
             "NAV": new stateElement(document.querySelector("nav")),
-            "NAV_TOGGLE": new stateElement(document.querySelector("nav-toggle")),
+            "NAV_TOGGLE": new stateElement(document.querySelector("#nav-toggle")),
         };
         var _nav = this.elements.NAV;
         var _navToggle = this.elements.NAV_TOGGLE;

@@ -33,11 +33,7 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(
                 root,
-                "layout"
-            ),
-            os.path.join(
-                root,
-                "views"
+                "views/front"
             ),
         ],
         "APP_DIRS": False,

@@ -1,3 +1,5 @@
+//@TODO: don't use modules for wider support
+
 class state {
     state: boolean = false;
 
@@ -45,7 +47,7 @@ class stateElement {
 class layout {
     elements = {
         "NAV": new stateElement(document.querySelector("nav")),
-        "NAV_TOGGLE": new stateElement(document.querySelector("nav-toggle")),
+        "NAV_TOGGLE": new stateElement(document.querySelector("#nav-toggle")),
     };
 
     constructor() {
