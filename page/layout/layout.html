@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>UpGrade</title>
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/static/style/layout.css">
+    <script type="module" src="/static/script/dist/main.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img class="logo-image" type="image/svg" src="/static/assets/logo.svg">
+            <div class="logo-text">
+                <p>UpGrade</p>
+                <p>Nachhilfe</p>
+            </div>
+        </div>
+        <nav>
+            <a class="button button-highlight" href="/">
+                HOME
+            </a>
+            <a class="button" href="/about">
+                ABOUT
+            </a>
+            <a class="button" href="/support">
+                SUPPORT
+            </a>
+        </nav>
+        <nav-toggle>
+            <img type="image/svg" src="/static/assets/nav.svg">
+        </nav-toggle>
+    </header>
+    <main>
+        <p>Main</p>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>Footer</p>
+    </footer>
+</body>
+</html>

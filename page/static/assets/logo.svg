@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 90">
+  <defs>
+    <style>
+      .fill-none {
+        fill: none;
+      }
+
+      .gradient {
+        fill: url(#gradient);
+      }
+
+      .clip {
+        clip-path: url(#clip);
+      }
+
+      .fill-color {
+        fill: #7fbf1f;
+      }
+
+      .fill-white {
+        fill: #ffffff;
+      }
+    </style>
+    <linearGradient id="gradient" x1="50" x2="50" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7fbf1f"/>
+      <stop offset="1" stop-color="#007f3f"/>
+    </linearGradient>
+    <clipPath id="clip" transform="translate(0 -5)">
+      <polygon class="fill-none" points="50 5 5 95 95 95 50 5"/>
+    </clipPath>
+    <symbol id="Hexagon" viewBox="0 0 100 80">
+      <polygon class="gradient" points="75 0 25 0 0 40 25 80 75 80 100 40 75 0"/>
+    </symbol>
+  </defs>
+  <g id="logo">
+    <use width="100" height="80" transform="scale(1 1.13)" xlink:href="#Hexagon"/>
+    <g class="clip">
+      <polygon class="fill-color" points="75 0 25 0 0 45 25 90 75 90 100 45 75 0"/>
+    </g>
+    <rect class="fill-white" x="37.5" y="50" width="25" height="40"/>
+    <polygon class="fill-white" points="50 0 25 50 75 50 50 0"/>
+  </g>
+</svg>
