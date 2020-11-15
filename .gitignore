@@ -1,3 +1,7 @@
 /venv
 /venv38
 /venv39
+
+/__pycache__
+/page/__pycache__
+/page/views/__pycache__
