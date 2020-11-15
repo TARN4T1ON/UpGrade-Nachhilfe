@@ -1,4 +1,5 @@
 //@TODO: don't use modules for wider support
+//@TODO: comment
 
 class state {
     state: boolean = false;

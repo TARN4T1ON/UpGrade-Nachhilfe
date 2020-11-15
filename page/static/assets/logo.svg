@@ -33,11 +33,11 @@
     </symbol>
   </defs>
   <g id="logo">
-    <use width="100" height="80" transform="scale(1 1.13)" xlink:href="#Hexagon"/>
+    <use width="100" height="80" transform="scale(1 1.125)" xlink:href="#Hexagon"/>
     <g class="clip">
       <polygon class="fill-color" points="75 0 25 0 0 45 25 90 75 90 100 45 75 0"/>
     </g>
-    <rect class="fill-white" x="37.5" y="50" width="25" height="40"/>
+    <rect class="fill-white" x="37.5" y="25" width="25" height="65"/>
     <polygon class="fill-white" points="50 0 25 50 75 50 50 0"/>
   </g>
 </svg>

@@ -1,6 +1,8 @@
+//@TODO: comment
+
 import { state, stateElement, layout } from "./layout.js";
 
-var _layout;
+var _layout: layout;
 
 function main() {
     _layout = new layout();

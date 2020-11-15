@@ -3,6 +3,8 @@ import sys
 
 from page import settings
 
+# @TODO: comment
+
 def main() -> None:
     print("main()")
 

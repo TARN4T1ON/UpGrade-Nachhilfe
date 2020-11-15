@@ -5,6 +5,8 @@ from django.views.generic.base import RedirectView
 
 import page.views as views
 
+# @TODO: comment
+
 urlpatterns = [
     path(
         "favicon.ico",
