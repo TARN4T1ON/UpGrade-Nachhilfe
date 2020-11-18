@@ -1,0 +1,28 @@
+{
+    "DEFAULT": {
+        "ENGINE": "sql_server.pyodbc",
+        "OPTIONS": {
+            "driver": "ODBC Driver 13 for SQL Server"
+        }
+    },
+    "DEVELOPMENT": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "OPTIONS": {},
+
+        "HOST": "",
+        "PORT": "",
+        "NAME": "./db/db.db",
+        "USER": "UpGrade",
+        "PASSWORD": "SQL"
+    },
+    "PRODUCTION": {
+        "ENGINE": null,
+        "OPTIONS": null,
+
+        "HOST": null,
+        "PORT": null,
+        "NAME": null,
+        "USER": null,
+        "PASSWORD": null
+    }
+}

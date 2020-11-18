@@ -1,13 +1,22 @@
 import os
 
-from django.conf import settings
+import json
 import mimetypes
+
+from django.conf import settings
 
 # @TODO: comment
 
 #global
 
-root = os.path.realpath(os.path.dirname(__file__))
+proot = os.path.realpath(
+    os.path.dirname(
+        os.path.dirname(__file__)
+    )
+)
+root = os.path.realpath(
+    os.path.dirname(__file__)
+)
 
 url = "localhost"
 port = 8000
@@ -22,7 +31,18 @@ BASE_DIR = root
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    "page.apps.pageConfig",
+
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+MIDDLEWARE = [
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
 #pages
@@ -37,9 +57,62 @@ TEMPLATES = [
                 root,
                 "views"
             ),
+            os.path.join(
+                root,
+                "views/user"
+            ),
         ],
         "APP_DIRS": False,
     }
+]
+
+#sessions
+
+SESSION_COOKIE_NAME = "session"
+
+#database
+
+#@TODO: dev sqlite db
+
+DATABASE_CONFIG = open(
+    os.path.join(
+        proot,
+        "db",
+        "connection.json"
+    )
+)
+DATABASE_CONN = json.load(DATABASE_CONFIG)
+DATABASE_CONFIG.close()
+
+DATABASE = {}
+if DEBUG:
+    for key in DATABASE_CONN["DEVELOPMENT"]:
+        value = DATABASE_CONN["DEVELOPMENT"][key]
+
+        if value == None:
+            try:
+                value = DATABASE_CONN["DEFAULT"][key]
+            except:
+                continue
+
+            if value == None:
+                continue
+
+        DATABASE[key] = value
+else:
+    pass
+
+DATABASES = {
+    "default": DATABASE
+}
+
+#user
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
 #static files

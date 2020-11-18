@@ -120,6 +120,9 @@ body {
     height: 100%;
     min-height: 100vh;
 
+    overflow-x: hidden;
+    overflow-y: visible;
+
     position: relative;
 
     display: flex;
@@ -205,7 +208,7 @@ footer
 
 /* Logo */
 
-.logo {
+.logo-container {
     width: auto;
     height: 100%;
 
@@ -222,7 +225,7 @@ footer
     background-color: transparent;
 }
 
-    .logo-image {
+    .logo {
         width: auto;
         height: 100%;
 
@@ -231,11 +234,11 @@ footer
         object-fit: contain;
     }
 
-    .logo .separator-vertical-tinym {
+    .logo-container .separator-vertical-tinym {
         margin-left: var(--scale-tiny);
     }
 
-    .logo .separator-vertical-tiny {
+    .logo-container .separator-vertical-tiny {
         margin-left: var(--scale-tiny);
         margin-right: var(--scale-tiny);
     }

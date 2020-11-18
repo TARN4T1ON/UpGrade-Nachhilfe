@@ -15,7 +15,9 @@ urlpatterns = [
         )
     )
 ]
-for instance in views.instances:
+for key in views.instances:
+    instance = views.instances[key]
+
     urlpatterns.append(
         path(
             instance.url,

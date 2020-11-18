@@ -18,14 +18,19 @@ def main() -> None:
     except:
         raise ImportError("main()::Error could not import django.core.management.execute_from_command_line")
 
-    execute_from_command_line(
-        [
-            settings.root,
-            "findstatic",
-        ] + settings.STATICFILES_DIRS
-    )
+    args = sys.argv
 
-    execute_from_command_line(sys.argv)
+    if len(args) >= 2 and args[1] == "runserver":
+        execute_from_command_line(
+            [
+                settings.root,
+                "findstatic",
+            ] + settings.STATICFILES_DIRS
+        )
+
+    execute_from_command_line(args)
+
+    print("main()::return")
 
     return
 
