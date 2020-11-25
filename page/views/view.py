@@ -71,7 +71,7 @@ class view:
             context
         )
 
-        method: function
+        method: function = None
         if request.method == "GET":
             method = self.get
         elif request.method == "HEAD":
@@ -91,10 +91,11 @@ class view:
         elif request.method == "PATCH":
             method = self.patch
 
-        return method(
-            request,
-            context
-        )
+        if method != None:
+            return method(
+                request,
+                context
+            )
 
     def get(
         self,
