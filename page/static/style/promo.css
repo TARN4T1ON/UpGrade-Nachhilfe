@@ -18,8 +18,8 @@
     justify-content: center;
     align-items: flex-start;
     
-    color: #000000;
-    background-color: #ffffff;
+    color: var(--color-black);
+    background-color: var(--color-white);
 }
 
     .promo-container:first-of-type {
@@ -27,7 +27,7 @@
     }
 
     .promo-container:nth-child(2n) {
-        color: #ffffff;
+        color: var(--color-white);
         background-color: var(--color-accent-dark);
     }
 

@@ -401,7 +401,11 @@ footer
 }
 
     .dropdown-container:hover {
-        cursor: pointer;
+        cursor: initial !important;
+    }
+
+    .dropdown-container > .button:hover {
+        cursor: initial !important;
     }
 
     .dropdown-container .dropdown {
