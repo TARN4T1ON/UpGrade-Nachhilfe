@@ -8,7 +8,8 @@ from page.views.view import view
 class logout(view):
     def get(
         self, 
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         response = HttpResponse()
 

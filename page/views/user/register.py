@@ -8,16 +8,18 @@ from page.views.view import view
 class register(view):
     def get(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         response = HttpResponse()
 
-        response.content = self.render()
+        response.content = self.render(context)
         return response
 
     def post(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         response = HttpResponse()
 

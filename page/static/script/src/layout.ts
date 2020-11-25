@@ -51,6 +51,10 @@ class layout {
         "NAV_TOGGLE": new stateElement(document.querySelector("#nav-toggle")),
     };
 
+    listeners = {
+        "SCROLL": null,
+    };
+
     constructor() {
         var _nav = this.elements.NAV;
         var _navToggle = this.elements.NAV_TOGGLE;
@@ -73,6 +77,26 @@ class layout {
             "click",
             _navToggle.handler
         );
+
+        this.listeners.SCROLL = window.addEventListener(
+            "scroll", 
+            this.scroll,
+            {
+                "passive": true
+            }
+        );
+    }
+
+    scroll(event: WheelEvent) {
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight;
+        var windowHeight = window.innerHeight;
+
+        document.documentElement.style.setProperty(
+            "--scroll-percentage",
+            ((scrollTop / (scrollHeight - windowHeight)) * 100).toString() + "%"
+        );
+        document.documentElement.dataset["scroll"] = scrollTop.toString();
     }
 }
 

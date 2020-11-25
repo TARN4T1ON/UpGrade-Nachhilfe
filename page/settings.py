@@ -21,6 +21,8 @@ root = os.path.realpath(
 url = "localhost"
 port = 8000
 
+separator = " :: "
+
 #main
 
 SECRET_KEY = "0"

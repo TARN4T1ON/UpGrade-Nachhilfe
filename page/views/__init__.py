@@ -1,4 +1,6 @@
 from page.views.index import index
+from page.views.about import about
+
 from page.views.user.register import register
 from page.views.user.login import login
 from page.views.user.logout import logout
@@ -9,6 +11,12 @@ instances = {
         "./index.html",
         ""
     ),
+    "about": index(
+        "about",
+        "./about.html",
+        "about"
+    ),
+
     "register": register(
         "register",
         "./user/register.html",

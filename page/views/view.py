@@ -1,27 +1,28 @@
-from typing import Any
 from django.template import loader, Context, Template
 from django.http import HttpRequest, HttpResponse
+
+import page.settings as settings
 
 class view:
     """View Wrapper Class"""
 
-    name : str
-    path : str
-    url : str
-
-    context : dict()
+    name: str
+    path: str
+    url: str
+    title: str
 
     def __init__(
         self,
-        name : str,
-        path : str,
-        url : str
+        name: str,
+        path: str,
+        url: str,
+        title: str = ""
     ):
         self.name = name
         self.path = path
         self.url = url
 
-        self.context = {}
+        self.title = title
 
         return
 
@@ -33,14 +34,20 @@ class view:
         else:
             return loader.get_template(self.path)
 
-    def render(self) -> str:
+    def render(
+        self,
+        context: dict()
+    ) -> str:
         """Renders Django Template using Self Defined Context"""
 
-        return self.load().render(self.context)
+        return self.load().render(
+            context
+        )
 
     def middleware(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> None:
         """
         Overridable Middleware called before specific Request Handler
@@ -57,76 +64,70 @@ class view:
         Transfers request to more specific handler
         """
 
+        context = {}
+
         self.middleware(
-            request
+            request,
+            context
         )
 
+        method: function
         if request.method == "GET":
-            return self.get(
-                request
-            )
+            method = self.get
         elif request.method == "HEAD":
-            return self.head(
-                request
-            )
+            method = self.head
         elif request.method == "POST":
-            return self.post(
-                request
-            )
+            method = self.post
         elif request.method == "PUT":
-            return self.put(
-                request
-            )
+            method = self.put
         elif request.method == "DELETE":
-            return self.delete(
-                request
-            )
+            method = self.delete
         elif request.method == "CONNECT":
-            return self.connect(
-                request
-            )
+            method = self.connect
         elif request.method == "OPTIONS":
-            return self.options(
-                request
-            )
+            method = self.options
         elif request.method == "TRACE":
-            return self.trace(
-                request
-            )
+            method = self.trace
         elif request.method == "PATCH":
-            return self.patch(
-                request
-            )
+            method = self.patch
+
+        return method(
+            request,
+            context
+        )
 
     def get(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable GET Handler
         """
 
         return HttpResponse(
-            self.render(),
-            self.context
+            self.render(
+                context
+            )
         )
 
     def head(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable HEAD Handler
         """
 
         return HttpResponse(
-            None,
-            self.context
+            None
         )
 
     def post(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable POST Handler
@@ -139,7 +140,8 @@ class view:
 
     def put(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable PUT Handler
@@ -152,7 +154,8 @@ class view:
 
     def delete(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable DELETE Handler
@@ -165,7 +168,8 @@ class view:
 
     def connect(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable CONNECT Handler
@@ -178,7 +182,8 @@ class view:
 
     def options(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable OPTIONS Handler
@@ -191,7 +196,8 @@ class view:
 
     def trace(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable TRACE Handler
@@ -204,7 +210,8 @@ class view:
 
     def patch(
         self,
-        request: HttpRequest
+        request: HttpRequest,
+        context: dict()
     ) -> HttpResponse:
         """
         Overridable PATCH Handler
@@ -217,9 +224,14 @@ class view:
 
 def _middleware(
     self,
-    request: HttpRequest
+    request: HttpRequest,
+    context: dict()
 ) -> None:
-    self.context["user"] = request.user.is_authenticated
+    context["user"] = request.user.is_authenticated
+    if self.title != "":
+        context["title"] = settings.separator + settings.separator.join(self.title)
+    else:
+        context["title"] = ""
 
     return
 

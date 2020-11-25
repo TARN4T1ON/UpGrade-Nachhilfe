@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style type="text/css">
+      .fill {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="fill" d="M98.27,15.87,85.86,28.28h0A10,10,0,0,1,71.73,14.15h0L84.13,1.73A25,25,0,1,0,98.27,15.87Z"/>
+  <path class="fill" d="M52.43,33.43,2.93,82.93A10,10,0,1,0,17.07,97.07l49.5-49.5Z"/>
+</svg>

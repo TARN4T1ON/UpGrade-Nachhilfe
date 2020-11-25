@@ -1,0 +1,159 @@
+/*
+    >>>
+    Promo
+    >>>
+*/
+
+
+
+.promo-container {
+    width: 100%;
+    height: 100vh;
+    
+    padding: var(--scale-huge);
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    
+    color: #000000;
+    background-color: #ffffff;
+}
+
+    .promo-container:first-of-type {
+        height: calc(100vh - var(--size-banner));
+    }
+
+    .promo-container:nth-child(2n) {
+        color: #ffffff;
+        background-color: var(--color-accent-dark);
+    }
+
+    .promo {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        
+        text-align: left;
+    }
+
+        .promo-container:nth-child(2n) .promo {
+            flex-direction: row-reverse;
+            
+            text-align: right;
+        }
+
+        .promo-two-thirds {}
+        .promo-list {}
+
+        .promo-text {
+            width: auto;
+            height: auto;
+
+            margin-right: var(--scale);
+            margin-left: 0px;
+        }
+
+            .promo-container:nth-child(2n) .promo-text {
+                margin-right: 0px;
+                margin-left: var(--scale);
+            }
+
+            .promo-two-thirds .promo-text {
+                flex-basis: calc(100% / 3 * 2 - var(--scale));
+            }
+
+            .promo-text p {
+                font-size: 32px;
+            }
+
+            .promo-text p:first-of-type {
+                margin-bottom: var(--scale);
+
+                font-size: 64px;
+                font-weight: bold;
+            }
+
+        .promo-image-container {
+            width: auto;
+            height: auto;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            /* @TODO: remove; for testing only! */
+            /* mix-blend-mode: difference; */
+        }
+
+        .promo-container-disappear {}
+
+            .promo-two-thirds .promo-image-container {
+                flex-basis: calc(100% / 3);
+            }
+
+            .promo-list .promo-image-container {
+                width: 100%;
+                max-height: 50%;
+            }
+
+            .promo-image {
+                width: 100%;
+                height: auto;
+            }
+
+
+/*
+    >>>
+    Queries
+    >>>
+*/
+
+
+
+@media screen and (max-width: 800px) {
+    .promo-text {
+        margin-right: 0px;
+        margin-left: 0px;
+
+        flex-basis: auto !important;
+    }
+    
+        .promo-text p {
+            font-size: 24px;
+        }
+        
+        .promo-text p:first-of-type {
+            font-size: 48px;
+        }
+    
+    .promo-image-container-disappear {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .promo-text {
+        margin-right: 0px;
+        margin-left: 0px;
+
+        flex-basis: auto !important;
+    }
+    
+        .promo-text p {
+            font-size: 16px;
+        }
+        
+        .promo-text p:first-of-type {
+            font-size: 32px;
+        }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      .fill {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+  <circle class="fill" cx="250" cy="50" r="50"/>
+  <circle class="fill" cx="250" cy="250" r="50"/>
+  <circle class="fill" cx="250" cy="450" r="50"/>
+</svg>

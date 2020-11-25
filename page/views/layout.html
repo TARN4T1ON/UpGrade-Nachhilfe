@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html data-scroll="0">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>UpGrade</title>
+    <title>UpGrade{{title}}</title>
     <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/static/style/layout.css">
     <script type="module" src="/static/script/dist/main.js"></script>
+    <!-- Imports -->
+    {% block import %}
+    {% endblock %}
 </head>
 
 <body>
@@ -23,30 +26,76 @@
         </a>
         <nav>
             <a class="button button-highlight" href="/">
-                HOME
+                <img type="image/svg" src="/static/assets/icons/home.svg">
+                <p>HOME</p>
             </a>
-            <a class="button" href="/about">
-                INFO
-            </a>
-            <a class="button" href="/support">
-                SUPPORT
-            </a>
+            <div class="dropdown-container">
+                <a class="button button-highlight">
+                    <img type="image/svg" src="/static/assets/icons/user.svg">
+                    <p>BENUTZER</p>
+                    <img class="dropdown-triangle" type="image/svg" src="/static/assets/icons/triangle.svg">
+                </a>
+                {% if user %}
+                <div class="dropdown nav">
+                    <a class="button">
+                        <img type="image/svg" src="/static/assets/icons/placeholder.svg">
+                        <p>PROFIL</p>
+                    </a>
+                    <a class="button" href="/user/logout">
+                        <img type="image/svg" src="/static/assets/icons/logout.svg">
+                        <p>AUSLOGGEN</p>
+                    </a>
+                </div>
+                {% else %}
+                <div class="dropdown nav">
+                    <a class="button" href="/user/login">
+                        <img type="image/svg" src="/static/assets/icons/login.svg">
+                        <p>ANMELDEN</p>
+                    </a>
+                    <a class="button" href="/user/register">
+                        <img type="image/svg" src="/static/assets/icons/register.svg">
+                        <p>REGISTRIEREN</p>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="dropdown-container">
+                <a class="button button-highlight">
+                    <img type="image/svg" src="/static/assets/icons/context.svg">
+                    <p>EXTRA</p>
+                    <img class="dropdown-triangle" type="image/svg" src="/static/assets/icons/triangle.svg">
+                </a>
+                <div class="dropdown nav">
+                    <a class="button" href="/about">
+                        <img type="image/svg" src="/static/assets/icons/info.svg">
+                        <p>INFO</p>
+                    </a>
+                    <a class="button" href="/support">
+                        <img type="image/svg" src="/static/assets/icons/wrench.svg">
+                        <p>SUPPORT</p>
+                    </a>
+                </div>
+            </div>
         </nav>
         <div id="nav-toggle">
             <img type="image/svg" src="/static/assets/nav.svg">
         </div>
     </header>
     <main>
-        {% if user %}
-        <p>User</p>
-        <p>{{user}}</p>
-        {% endif %}
-        <p>Main</p>
+        <!-- Main -->
         {% block main %}
         {% endblock %}
     </main>
     <footer>
-        <p>Footer</p>
+        <!-- @TODO: footer -->
+        <div class="logo-container-simple">
+            <div class="separator-vertical-tinym"></div>
+            <div class="separator-vertical-tiny"></div>
+            <div class="logo-text">
+                <p>UpGrade</p>
+                <p>Nachhilfe</p>
+            </div>
+        </div>
     </footer>
 </body>
 
