@@ -9,27 +9,45 @@ instances = {
     "index": index(
         "index",
         "./index.html",
-        ""
+        "",
+        [
+            "HOME"
+        ]
     ),
     "about": index(
         "about",
         "./about.html",
-        "about"
+        "about",
+        [
+            "ÜBER UNS"
+        ]
     ),
 
     "register": register(
         "register",
         "./user/register.html",
-        "user/register"
+        "user/register",
+        [
+            "BENUTZER",
+            "REGISTRIEREN"
+        ]
     ),
     "login": login(
         "login",
         "./user/login.html",
-        "user/login"
+        "user/login",
+        [
+            "BENUTZER",
+            "EINLOGGEN"
+        ]
     ),
     "logout": logout(
         "logout",
         "./user/logout.html",
-        "user/logout"
+        "user/logout",
+        [
+            "BENUTZER",
+            "AUSLOGGEN"
+        ]
     ),
 }

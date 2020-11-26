@@ -347,6 +347,7 @@ footer
 
     font-size: var(--size-text);
     font-weight: normal;
+    text-align: center;
     text-decoration: none;
 
     color: var(--color-text);
@@ -362,6 +363,10 @@ footer
     transition-duration: var(--transition-duration);
     transition-timing-function: var(--transition-timing-function);
 }
+
+    .button-center {
+        justify-content: center;
+    }
 
     .button > * + * {
         margin-left: var(--scale-smallm);
@@ -432,8 +437,8 @@ footer
         }
 
     .dropdown-triangle {
-        width: auto;
-        height: auto;
+        width: var(--scale-large) !important;
+        height: var(--scale-large) !important;
 
         transform: rotate(180deg);
 

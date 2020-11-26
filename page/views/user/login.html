@@ -1,9 +1,16 @@
 {% extends "../layout.html" %}
 
+{% block import %}
+<link rel="stylesheet" type="text/css" href="/static/style/promo.css">
+{% endblock %}
+
 {% block main %}
-<form action="/user/login" method="post">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <button class="button button-highlight" type="submit">EINLOGGEN</button>
-</form>
+<div class="promo-container promo-container-height">
+    <p>x</p>
+    <form action="/user/login" method="post">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <button class="button button-highlight button-center" type="submit" style="width: 100%;">EINLOGGEN</button>
+    </form>
+</div>
 {% endblock %}
