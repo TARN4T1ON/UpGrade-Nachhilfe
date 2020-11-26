@@ -2,6 +2,7 @@ from django.template import loader, Context, Template
 from django.http import HttpRequest, HttpResponse
 
 import page.settings as settings
+import page.views.status as status
 
 class view:
     """View Wrapper Class"""
@@ -92,10 +93,29 @@ class view:
             method = self.patch
 
         if method != None:
-            return method(
+            output = method(
                 request,
                 context
             )
+
+            if output.status_code == 400:
+                return status.handler400(
+                    request
+                )
+            elif output.status_code == 403:
+                return status.handler403(
+                    request
+                )
+            elif output.status_code == 404:
+                return status.handler404(
+                    request
+                )
+            elif output.status_code == 500:
+                return status.handler500(
+                    request
+                )
+            else:
+                return output
 
     def get(
         self,
@@ -229,6 +249,7 @@ def _middleware(
     context: dict()
 ) -> None:
     context["user"] = request.user.is_authenticated
+    
     if self.title != "":
         context["title"] = settings.separator + settings.separator.join(self.title)
     else:

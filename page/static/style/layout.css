@@ -177,46 +177,43 @@ button {
 
 /* Separators */
 
-.separator-vertical,
-
-.separator-vertical-small,
-.separator-vertical-smallm,
-.separator-vertical-large,
-.separator-vertical-largem,
-
-.separator-vertical-tiny,
-.separator-vertical-tinym,
-.separator-vertical-huge,
-.separator-vertical-hugem
-{
-    height: 100%;
+.separator-horizontal {
+    width: 100%;
+    height: var(--_scale-separator);
 
     background-color: var(--color-contrast);
 }
 
 .separator-vertical {
-    width: var(--scale);
+    width: var(--_scale-separator);
+    height: 100%;
+
+    background-color: var(--color-contrast);
 }
 
-.separator-vertical-small {
-    width: var(--scale-small);
-}
-.separator-vertical-smallm {
-    width: var(--scale-smallm);
+.separator {
+    --_scale-separator: var(--scale);
 }
 
-.separator-vertical-large {
-    width: var(--scale-large);
+.separator-small {
+    --_scale-separator: var(--scale-small);
 }
-.separator-vertical-largem {
-    width: var(--scale-largem);
+.separator-smallm {
+    --_scale-separator: var(--scale-smallm);
 }
 
-.separator-vertical-tiny {
-    width: var(--scale-tiny);
+.separator-large {
+    --_scale-separator: var(--scale-large);
 }
-.separator-vertical-tinym {
-    width: var(--scale-tinym);
+.separator-largem {
+    --_scale-separator: var(--scale-largem);
+}
+
+.separator-tiny {
+    --_scale-separator: var(--scale-tiny);
+}
+.separator-tinym {
+    --_scale-separator: var(--scale-tinym);
 }
 
 /* Banner */
@@ -275,14 +272,14 @@ footer
         object-fit: contain;
     }
 
-    .logo-container .separator-vertical-tinym,
-    .logo-container-simple .separator-vertical-tinym
+    .logo-container .separator-tinym,
+    .logo-container-simple .separator-tinym
     {
         margin-left: var(--scale-tiny);
     }
 
-    .logo-container .separator-vertical-tiny,
-    .logo-container-simple .separator-vertical-tiny
+    .logo-container .separator-tiny,
+    .logo-container-simple .separator-tiny
     {
         margin-left: var(--scale-tiny);
         margin-right: var(--scale-tiny);
@@ -349,6 +346,8 @@ footer
     font-weight: normal;
     text-align: center;
     text-decoration: none;
+
+    white-space: nowrap;
 
     color: var(--color-text);
     
@@ -437,8 +436,8 @@ footer
         }
 
     .dropdown-triangle {
-        width: var(--scale-large) !important;
-        height: var(--scale-large) !important;
+        width: var(--scale-largem) !important;
+        height: var(--scale-largem) !important;
 
         transform: rotate(180deg);
 
@@ -556,6 +555,12 @@ nav {
     
 
 main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 100%;

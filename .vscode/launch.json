@@ -12,6 +12,7 @@
             "console": "integratedTerminal",
             "args": [
                 "runserver",
+                "--insecure",
                 //"--noreload",
                 "localhost:8000"
             ]

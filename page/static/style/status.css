@@ -1,0 +1,53 @@
+/*
+    >>>
+    Status
+    >>>
+*/
+
+
+
+.status-code {
+    font-size: 192px !important;
+    font-weight: bold !important;
+
+    text-align: center !important;
+}
+
+.status-name {
+    font-size: 96px !important;
+    font-weight: normal !important;
+
+    text-align: center !important;
+}
+
+.status-message
+{
+    font-size: 64px !important;
+    font-weight: normal !important;
+    
+    text-align: justify !important;
+}
+
+
+
+/*
+    >>>
+    Queries
+    >>>
+*/
+
+
+
+@media screen and (max-width: 800px) {
+    .status-code {
+        font-size: 144px !important;
+    }
+
+    .status-name {
+        font-size: 56px !important;
+    }
+
+    .status-message {
+        font-size: 32px !important;
+    }
+}

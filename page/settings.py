@@ -25,8 +25,8 @@ separator = " :: "
 
 #main
 
-SECRET_KEY = "0"
-DEBUG = True
+SECRET_KEY = "01234567890987654321"
+DEBUG = False
 
 BASE_DIR = root
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]

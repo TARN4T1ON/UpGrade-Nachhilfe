@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block import %}
+<link rel="stylesheet" type="text/css" href="/static/style/promo.css">
+<link rel="stylesheet" type="text/css" href="/static/style/status.css">
+{% endblock %}
+
+{% block main%}
+<section class="promo-container promo-container-fill">
+    <div class="promo">
+        <div class="promo-text">
+            <p class="status-code">{{code}}</p>
+            <p class="status-name">{{name}}</p>
+            <div class="separator-horizontal separator-small" style="margin-top: var(--scale); margin-bottom: var(--scale);"></div>
+            <p class="status-message">{{message}}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

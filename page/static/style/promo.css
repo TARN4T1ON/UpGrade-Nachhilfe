@@ -22,11 +22,17 @@
     background-color: var(--color-white);
 }
 
-    .promo-container-height {
+    .promo-container-fill {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+    }
+
+    .promo-container-fill-screen {
         height: 100vh;
     }
 
-    .promo-container-height:first-of-type {
+    .promo-container-fill-screen:first-of-type {
         height: calc(100vh - var(--size-banner));
     }
 
@@ -114,6 +120,7 @@
                 width: 100%;
                 height: auto;
             }
+
 
 
 /*

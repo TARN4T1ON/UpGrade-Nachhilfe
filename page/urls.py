@@ -1,3 +1,4 @@
+from django.conf.urls import handler400
 from django.urls import path
 
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -25,3 +26,8 @@ for key in views.instances:
             name = instance.name
         )
     )
+
+handler400 = "page.views.status.handler400"
+handler403 = "page.views.status.handler403"
+handler404 = "page.views.status.handler404"
+handler500 = "page.views.status.handler500"
