@@ -1,10 +1,20 @@
 {% extends "../layout.html" %}
 
+{% block import %}
+<link rel="stylesheet" type="text/css" href="/static/style/promo.css">
+{% endblock %}
+
 {% block main %}
-<p>register</p>
-<form action="/user/register" method="post">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <button type="submit">Submit</button>
-</form>
+<div class="promo-container promo-container-fill">
+    <form style="display: grid; grid-template-columns: min-content auto; grid-gap: var(--scale-large);" action="/user/register/" method="post">
+        <p style="grid-column: 1 / 3;">Benutzername</p>
+        <img type="image/svg" src="/static/assets/icons/tag.svg">
+        <input type="text" name="username" autocomplete="username">
+        <p style="grid-column: 1 / 3;">Password</p>
+        <img type="image/svg" src="/static/assets/icons/key.svg">
+        <input type="password" name="password" autocomplete="current-password">
+        <button class="button button-highlight button-center" style="grid-column: 1 / 3;" type="submit">REGISTRIEREN</button>
+        <p style="grid-column: 1 / 3; text-align: center;">Bereits ein Benutzer? <a class="button" style="padding: var(--scale); display: inline-flex;" href="/user/login/">Einloggen</a></p>
+    </form>
+</div>
 {% endblock %}

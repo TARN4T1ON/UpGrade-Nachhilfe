@@ -17,7 +17,7 @@ instances = {
     "about": index(
         "about",
         "./about.html",
-        "about",
+        "about/",
         [
             "ÜBER UNS"
         ]
@@ -26,7 +26,7 @@ instances = {
     "register": register(
         "register",
         "./user/register.html",
-        "user/register",
+        "user/register/",
         [
             "BENUTZER",
             "REGISTRIEREN"
@@ -35,7 +35,7 @@ instances = {
     "login": login(
         "login",
         "./user/login.html",
-        "user/login",
+        "user/login/",
         [
             "BENUTZER",
             "EINLOGGEN"
@@ -44,7 +44,7 @@ instances = {
     "logout": logout(
         "logout",
         "./user/logout.html",
-        "user/logout",
+        "user/logout/",
         [
             "BENUTZER",
             "AUSLOGGEN"

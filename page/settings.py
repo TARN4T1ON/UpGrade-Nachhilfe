@@ -19,7 +19,7 @@ root = os.path.realpath(
 )
 
 url = "localhost"
-port = 8000
+port = 80
 
 separator = " :: "
 
@@ -30,7 +30,9 @@ DEBUG = False
 
 BASE_DIR = root
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "upgrade.cringe.one"
+]
 
 INSTALLED_APPS = [
     "page.apps.pageConfig",
@@ -43,10 +45,36 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(
+                proot,
+                "log",
+                "debug.log"
+            )
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": [
+                "file"
+            ],
+            "level": "DEBUG",
+            "propagate": True
+        }
+    },
+}
 
 #pages
 
@@ -62,12 +90,18 @@ TEMPLATES = [
             ),
             os.path.join(
                 root,
+                "views/status"
+            ),
+            os.path.join(
+                root,
                 "views/user"
             ),
         ],
         "APP_DIRS": False,
     }
 ]
+
+APPEND_SLASH = True
 
 #sessions
 
@@ -88,22 +122,25 @@ DATABASE_CONN = json.load(DATABASE_CONFIG)
 DATABASE_CONFIG.close()
 
 DATABASE = {}
+DATABASE_KEY: str
 if DEBUG:
-    for key in DATABASE_CONN["DEVELOPMENT"]:
-        value = DATABASE_CONN["DEVELOPMENT"][key]
+    DATABASE_KEY = "DEVELOPMENT"
+else:
+    DATABASE_KEY = "PRODUCTION"
+
+for key in DATABASE_CONN["DEVELOPMENT"]:
+    value = DATABASE_CONN["DEVELOPMENT"][key]
+
+    if value == None:
+        try:
+            value = DATABASE_CONN["DEFAULT"][key]
+        except:
+            continue
 
         if value == None:
-            try:
-                value = DATABASE_CONN["DEFAULT"][key]
-            except:
-                continue
+            continue
 
-            if value == None:
-                continue
-
-        DATABASE[key] = value
-else:
-    pass
+    DATABASE[key] = value
 
 DATABASES = {
     "default": DATABASE

@@ -33,6 +33,9 @@
     --color-accent-bright: #afef00;
     --color-accent-brighter: #bfff00;
 
+    --color-error: #ff3f1f;
+    --color-warning: #ff7f3f;
+
     --color-contrast: #444444;
 
     --color-white: #ffffff;
@@ -135,12 +138,48 @@ body {
     >>>
 */
 
+
+
 button {
+    padding: var(--scale);
+
     border: none;
     outline: none;
-
-    border-radius: var(--scale-large);
 }
+
+    form > button {
+        width: 100% !important;
+    }
+
+input {
+    width: auto;
+    height: auto;
+
+    padding: var(--scale);
+
+    border: none;
+    outline: none;
+}
+
+    form > input {
+        width: 100% !important;
+    }
+
+form {
+    width: 100%;
+    height: auto;
+
+    padding: var(--scale-large);
+
+    color: var(--color-white);
+    background-color: var(--color-contrast);
+}
+
+    form img {
+        width: var(--scale-huge);
+        height: var(--scale-huge);
+    }
+
 
 
 /*
@@ -329,8 +368,8 @@ footer
     height: auto;
 
     padding: var(--scale-largem);
-    padding-left: var(--scale-large);
     padding-right: var(--scale-large);
+    padding-left: var(--scale-large);
 
     display: flex;
     flex-direction: row;
@@ -339,8 +378,6 @@ footer
     align-items: center;
 
     cursor: pointer;
-
-    /* border-radius: var(--scale-large); */
 
     font-size: var(--size-text);
     font-weight: normal;
@@ -630,6 +667,11 @@ footer {
         {
             width: 100%;
             height: auto;
+
+            padding-top: var(--scale-large);
+            padding-right: var(--scale-large);
+            padding-bottom: var(--scale-large);
+            padding-left: var(--scale-large);
 
             background-size: 200% 100%;
             background-position-x: left;

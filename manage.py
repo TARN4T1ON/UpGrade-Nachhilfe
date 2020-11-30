@@ -20,15 +20,20 @@ def main() -> None:
 
     args = sys.argv
 
-    if len(args) >= 2 and args[1] == "runserver":
-        execute_from_command_line(
-            [
-                settings.root,
-                "findstatic",
-            ] + settings.STATICFILES_DIRS
-        )
+    execute_from_command_line(
+        [
+            settings.root,
+            "findstatic",
+        ] + settings.STATICFILES_DIRS
+    )
 
-    execute_from_command_line(args)
+    execute_from_command_line(
+        [
+            settings.root,
+            "runserver",
+            "192.168.2.127:8000"
+        ]
+    )
 
     print("main()::return")
 

@@ -16,13 +16,13 @@
         "PASSWORD": "SQL"
     },
     "PRODUCTION": {
-        "ENGINE": null,
-        "OPTIONS": null,
+        "ENGINE": "django.db.backends.sqlite3",
+        "OPTIONS": {},
 
-        "HOST": null,
-        "PORT": null,
-        "NAME": null,
-        "USER": null,
-        "PASSWORD": null
+        "HOST": "",
+        "PORT": "",
+        "NAME": "./db/db.db",
+        "USER": "UpGrade",
+        "PASSWORD": "SQL"
     }
 }
