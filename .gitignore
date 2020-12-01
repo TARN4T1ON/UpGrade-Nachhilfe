@@ -3,3 +3,6 @@ venv*
 log/**.log
 
 .vscode/settings.json
+
+.jsbeautifyrc
+.prettierrc
