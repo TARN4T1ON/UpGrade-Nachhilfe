@@ -5,6 +5,8 @@ from page.views.user.register import register
 from page.views.user.login import login
 from page.views.user.logout import logout
 
+# page definitions
+
 instances = {
     "index": index(
         "index",
@@ -14,7 +16,7 @@ instances = {
             "HOME"
         ]
     ),
-    "about": index(
+    "about": about(
         "about",
         "./about.html",
         "about/",

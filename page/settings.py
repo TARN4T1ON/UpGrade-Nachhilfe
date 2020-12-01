@@ -1,42 +1,48 @@
 import os
 
+import secrets
+
 import json
 import mimetypes
 
 from django.conf import settings
 
-# @TODO: comment
+# >>>
+# Global
+# >>>
 
-#global
-
-proot = os.path.realpath(
+# project root
+root = os.path.realpath(
     os.path.dirname(
         os.path.dirname(__file__)
     )
 )
-root = os.path.realpath(
+
+# page root
+rootPage = os.path.realpath(
     os.path.dirname(__file__)
 )
 
 url = "localhost"
-port = 80
+port = 8000
 
 separator = " :: "
 
-#main
+# >>>
+# Main
+# >>>
 
-SECRET_KEY = "01234567890987654321"
-DEBUG = False
+# generate secret key during runtime
+SECRET_KEY = secrets.token_hex(64)
+DEBUG = True
 
-BASE_DIR = root
+BASE_DIR = rootPage
 
 ALLOWED_HOSTS = [
-    "upgrade.cringe.one"
+    url,
 ]
 
 INSTALLED_APPS = [
-    "page.apps.pageConfig",
-
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -51,32 +57,35 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(
-                proot,
-                "log",
-                "debug.log"
-            )
-        }
-    },
-    "loggers": {
-        "django": {
-            "handlers": [
-                "file"
-            ],
-            "level": "DEBUG",
-            "propagate": True
-        }
-    },
-}
+if DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "file": {
+                "level": "DEBUG",
+                "class": "logging.FileHandler",
+                "filename": os.path.join(
+                    root,
+                    "log",
+                    "debug.log"
+                )
+            }
+        },
+        "loggers": {
+            "django": {
+                "handlers": [
+                    "file"
+                ],
+                "level": "DEBUG",
+                "propagate": True
+            }
+        },
+    }
 
-#pages
+# >>>
+# Pages
+# >>>
 
 ROOT_URLCONF = "page.urls"
 
@@ -85,15 +94,15 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(
-                root,
+                rootPage,
                 "views"
             ),
             os.path.join(
-                root,
+                rootPage,
                 "views/status"
             ),
             os.path.join(
-                root,
+                rootPage,
                 "views/user"
             ),
         ],
@@ -103,17 +112,19 @@ TEMPLATES = [
 
 APPEND_SLASH = True
 
-#sessions
+# >>>
+# Sessions
+# >>>
 
 SESSION_COOKIE_NAME = "session"
 
-#database
-
-#@TODO: dev sqlite db
+# >>>
+# Database
+# >>>
 
 DATABASE_CONFIG = open(
     os.path.join(
-        proot,
+        root,
         "db",
         "connection.json"
     )
@@ -146,32 +157,40 @@ DATABASES = {
     "default": DATABASE
 }
 
-#user
+# >>>
+# User
+# >>>
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 
-#static files
+# >>>
+# Static files
+# >>>
 
 STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(
-    root, 
+    rootPage, 
     "_static"
 )
 
 STATICFILES_DIRS = [
     os.path.join(
-        root,
+        rootPage,
         "static"
     ),
 ]
 
-#mimetypes
+# >>>
+# MIME types
+# >>>
+
+# used for debug server static file serving
 
 mimetypes.add_type(
     "text/html", 

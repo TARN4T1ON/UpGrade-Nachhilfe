@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style type="text/css">
+      .fill {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+  <polygon class="fill" points="187.5 450 0 250 62.5 183.33 187.5 316.67 437.5 50 500 116.67 187.5 450"/>
+</svg>

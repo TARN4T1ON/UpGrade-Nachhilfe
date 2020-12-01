@@ -51,7 +51,8 @@ class view:
         context: dict()
     ) -> None:
         """
-        Overridable Middleware called before specific Request Handler
+        Overridable Middleware called before specific Request Handler\n
+        Intended to be used for context modification
         """
 
         pass
@@ -65,12 +66,16 @@ class view:
         Transfers request to more specific handler
         """
 
+        # request bound context
+
         context = {}
 
         self.middleware(
             request,
             context
         )
+
+        # select method based on request method
 
         method: function = None
         if request.method == "GET":
@@ -92,11 +97,17 @@ class view:
         elif request.method == "PATCH":
             method = self.patch
 
-        if method != None:
+        if method == None:
+            return status.handler500(
+                request
+            )
+        else:
             output = method(
                 request,
                 context
             )
+
+            # application error status handling
 
             if output.status_code == 400:
                 return status.handler400(

@@ -1,6 +1,5 @@
-/venv*
+venv*
 **/__pycache__
-/log
+log/**.log
 
-**/web.config
-/aspnet_client
+.vscode/settings.json

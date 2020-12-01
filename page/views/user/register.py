@@ -4,19 +4,9 @@ from django.contrib.auth import login as _login
 from django.contrib.auth.models import User
 
 from page.views.view import view
-import page.views.message as msg
+import page.views.message as message
 
 class register(view):
-    def get(
-        self,
-        request: HttpRequest,
-        context: dict()
-    ) -> HttpResponse:
-        response = HttpResponse()
-
-        response.content = self.render(context)
-        return response
-
     def post(
         self,
         request: HttpRequest,
@@ -31,30 +21,35 @@ class register(view):
             username = username
         ).exists()
 
+        msg: message
         if exists:
-            message = msg.message(
-                msg.TYPES["ERROR"],
-                "User already exists"
-            )
-
-            message.cookie(
+            msg = message.message(
+                message.types.ERROR.name,
+                "Dieser Benutzer existiert bereits!",
                 response
             )
 
-            response.content = message.toJSON()
-            response["content-type"] = "text/json"
-            return response
+            response["Location"] = self.url
+            response.status_code = 302
+        else:
+            user: User = User.objects.create(
+                username = username
+            )
+            user.set_password(password)
+            user.save()
 
-        user: User = User.objects.create(
-            username = username
-        )
-        user.set_password(password)
-        user.save()
+            _login(
+                request,
+                user
+            )
 
-        _login(
-            request,
-            user
-        )
+            msg = message.message(
+                message.types.SUCCESS.name,
+                "Erfolgreich registriert!",
+                response
+            )
 
-        response.content = "user created"
+            response["Location"] = "/"
+            response.status_code = 302
+
         return response

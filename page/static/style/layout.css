@@ -33,13 +33,20 @@
     --color-accent-bright: #afef00;
     --color-accent-brighter: #bfff00;
 
+    --color-warning: #ff9f3f;
     --color-error: #ff3f1f;
-    --color-warning: #ff7f3f;
 
     --color-contrast: #444444;
 
     --color-white: #ffffff;
+    --color-overlay-white-light: #ffffff3f;
+    --color-overlay-white-medium: #ffffff7f;
+
+    --color-background: #e7e7e7;
+
     --color-black: #000000;
+    --color-overlay-black-light: #0000003f;
+    --color-overlay-black-medium: #0000007f;
 
     --color-text: var(--color-white);
 
@@ -128,6 +135,9 @@ body {
     /* font-family: Arial, Helvetica, sans-serif, "Segoe UI Emoji"; */
     font-family: "Segoe UI", Arial, Helvetica, sans-serif, emoji;
     font-size: var(--size-text);
+
+    color: var(--color-black);
+    background-color: var(--color-background);
 }
 
 
@@ -274,6 +284,86 @@ footer
 
     z-index: 1;
 }
+
+/* Message */
+
+.message-container {
+    width: 100%;
+    max-width: calc(100% - var(--scale) * 2);
+    height: auto;
+
+    margin-top: var(--scale);
+    margin-bottom: var(--scale);
+
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    transform: translateX(-50%);
+
+    color: var(--color-white);
+    background-color: var(--color-black);
+}
+
+    .message-container:hover {
+        cursor: pointer;
+    }
+
+    .message-container[data-type="SUCCESS"] {
+        background-color: var(--color-accent);
+    }
+
+    .message-container[data-type="ERROR"] {
+        background-color: var(--color-error);
+    }
+
+    .message-container[data-type="WARNING"] {
+        background-color: var(--color-warning);
+    }
+
+    .message-icon-container{
+        width: auto;
+        height: auto;
+
+        padding: var(--scale-large);
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        background-color: var(--color-overlay-black-light);
+    }
+
+        .message-icon {
+            width: var(--scale-huge);
+            height: auto;
+
+            display: none;
+        }
+
+            .message-container[data-type="SUCCESS"] .message-icon[data-type="SUCCESS"] {
+                display: block;
+            }
+
+            .message-container[data-type="ERROR"] .message-icon[data-type="ERROR"] {
+                display: block;
+            }
+
+            .message-container[data-type="WARNING"] .message-icon[data-type="WARNING"] {
+                display: block;
+            }
+
+    .message-text {
+        padding: var(--scale-large);
+    }
 
 /* Logo */
 

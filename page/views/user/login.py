@@ -6,18 +6,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 from page.views.view import view
+import page.views.message as message
 
 class login(view):
-    def get(
-        self,
-        request: HttpRequest,
-        context: dict()
-    ) -> HttpResponse:
-        response = HttpResponse()
-
-        response.content = self.render(context)
-        return response
-
     def post(
         self,
         request: HttpRequest,
@@ -25,22 +16,49 @@ class login(view):
     ) -> HttpResponse:
         response = HttpResponse()
 
+        # get username and password from POST data
+
         username = request.POST["username"]
         password = request.POST["password"]
+
+        # try to authenticate user
 
         user = authenticate(
             username = username,
             password = password
         )
 
+        msg: message
         if user == None:
-            response.content = "invalid user"
+            # user doesn't exist;
+            # display error message on page redirect
+
+            msg = message.message(
+                message.types.ERROR.name,
+                "Dieser Benutzer existiert nicht!",
+                response
+            )
+
+            response["Location"] = self.url
+            response.status_code = 302
         else:
+            # user exists
+            # log in user
+
             _login(
                 request,
                 user
             )
 
-            response.content = "authenticated user %s" % user.username
+            # display success message on page redirect
+
+            msg = message.message(
+                message.types.SUCCESS.name,
+                "Erfolgreich eingeloggt!",
+                response
+            )
+
+            response["Location"] = "/"
+            response.status_code = 302
             
         return response

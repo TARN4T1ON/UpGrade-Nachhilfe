@@ -1,103 +1,65 @@
-//@TODO: don't use modules for wider support
-//@TODO: comment
-
-class state {
-    state: boolean = false;
-
-    toggle(
-        override: boolean = null
-    ) {
-        if (this.state == null)
-        {
-            this.state = false;
-        }
-
-        if (override == null)
-        {
-            this.state = !this.state;
-        }
-        else
-        {
-            this.state = override;
-        }
-    }
-}
-
-class stateElement {
-    _state: state;
-
-    element: HTMLElement;
-
-    constructor(
-        element: HTMLElement
-    ) {
-        this._state = new state();
-
-        this.element = element;
-    }
-
-    handler(event: Event) { }
-
-    toggle(
-        override: boolean = null
-    ) {
-        this._state.toggle(override);
-    }
-}
+import { state } from "./helper.js";
 
 class layout {
     elements = {
-        "NAV": new stateElement(document.querySelector("nav")),
-        "NAV_TOGGLE": new stateElement(document.querySelector("#nav-toggle")),
+        "nav": document.querySelector("nav"),
+        "navToggle": document.querySelector("#nav-toggle"),
     };
 
-    listeners = {
-        "SCROLL": null,
-    };
+    states = {};
+    handlers = {};
 
     constructor() {
-        var _nav = this.elements.NAV;
-        var _navToggle = this.elements.NAV_TOGGLE;
+        var that = this;
 
-        _nav.element.style.transform = "translateX(100%)";
-        _navToggle.handler = function (event: Event) {
-            _navToggle._state.toggle();
+        //navToggle
 
-            if (_navToggle._state.state)
-            {
-                _nav.element.style.transform = "translateX(0%)";
-            }
-            else
-            {
-                _nav.element.style.transform = "translate(100%)";
-            }
+        this.states["navToggle"] = new state();
+
+        this.handlers["navToggle"] = {};
+        this.handlers["navToggle"]["click"] = function (
+            event: MouseEvent
+        ): void {
+            that.states["navToggle"].toggle();
+
+            if (that.states["navToggle"].state) that.elements.nav.style.transform = "translateX(0%)";
+            else that.elements.nav.style.transform = "translate(100%)";
         }
 
-        _navToggle.element.addEventListener(
+        this.elements.navToggle.addEventListener(
             "click",
-            _navToggle.handler
+            this.handlers["navToggle"]["click"]
         );
 
-        this.listeners.SCROLL = window.addEventListener(
-            "scroll", 
-            this.scroll,
+        //scroll
+
+        this.handlers["window"] = {};
+        this.handlers["window"]["scroll"] = function (
+            event: WheelEvent
+        ): void {
+            var scrollTop = document.documentElement.scrollTop;
+            var scrollHeight = document.documentElement.scrollHeight;
+            var windowHeight = window.innerHeight;
+
+            document.documentElement.style.setProperty(
+                "--scroll-percentage",
+                ((scrollTop / (scrollHeight - windowHeight)) * 100).toString() + "%"
+            );
+            document.documentElement.dataset["scroll"] = scrollTop.toString();
+        }
+
+        window.addEventListener(
+            "scroll",
+            this.handlers["window"]["scroll"],
             {
                 "passive": true
             }
         );
-    }
 
-    scroll(event: WheelEvent) {
-        var scrollTop = document.documentElement.scrollTop;
-        var scrollHeight = document.documentElement.scrollHeight;
-        var windowHeight = window.innerHeight;
+        //nav
 
-        document.documentElement.style.setProperty(
-            "--scroll-percentage",
-            ((scrollTop / (scrollHeight - windowHeight)) * 100).toString() + "%"
-        );
-        document.documentElement.dataset["scroll"] = scrollTop.toString();
+        this.elements.nav.style.transform = "translateX(100%)";
     }
 }
 
-export { state, stateElement, layout };
+export { layout };

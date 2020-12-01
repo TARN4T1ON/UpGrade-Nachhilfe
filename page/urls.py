@@ -1,4 +1,3 @@
-from django.conf.urls import handler400
 from django.urls import path
 
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -6,9 +5,12 @@ from django.views.generic.base import RedirectView
 
 import page.views as views
 
-# @TODO: comment
+# >>>
+# Django URL Configuration
+# >>>
 
 urlpatterns = [
+    # favicon definition
     path(
         "favicon.ico",
         RedirectView.as_view(
@@ -16,6 +18,9 @@ urlpatterns = [
         )
     )
 ]
+
+# iterate over views and add to patterns
+
 for key in views.instances:
     instance = views.instances[key]
 
@@ -26,6 +31,8 @@ for key in views.instances:
             name = instance.name
         )
     )
+
+# error handlers
 
 handler400 = "page.views.status.status.handler400"
 handler403 = "page.views.status.status.handler403"

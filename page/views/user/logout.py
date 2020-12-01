@@ -4,6 +4,7 @@ from django.contrib.auth import logout as _logout
 from django.contrib.auth.models import User
 
 from page.views.view import view
+import page.views.message as message
 
 class logout(view):
     def get(
@@ -13,12 +14,27 @@ class logout(view):
     ) -> HttpResponse:
         response = HttpResponse()
 
+        msg: message
         if request.user.is_authenticated:
             _logout(request)
 
-            response.status_code = 301
+            msg = message.message(
+                message.types.SUCCESS.name,
+                "Erfolgreich ausgeloggt!",
+                response
+            )
+
             response["Location"] = "/"
+            response.status_code = 302
+            
         else:
-            response.status_code = 400
+            msg = message.message(
+                message.types.ERROR.name,
+                "Nicht eingeloggt!",
+                response
+            )
+
+            response["Location"] = "/"
+            response.status_code = 302
 
         return response

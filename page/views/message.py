@@ -1,50 +1,46 @@
 import json
-from django.http import HttpResponse
 import urllib.parse as parse
+from enum import Enum
 
-TYPES = {
-    "SUCCESS": 0,
-    "ERROR": 1,
-    "WARNING": 2,
-}
+from django.http import HttpResponse
 
-COLORS = {
-    0: "var(--color-accent)",
-    1: "var(--color-error)",
-    2: "var(--color-warning)",
-}
+from page import settings
+
+class types(Enum):
+    SUCCESS = "SUCCESS"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
 
 class message:
-    type: int
+    type: str
 
     message: str
-    color: str
 
     def __init__(
         self,
-        type: int,
+        type: str,
         message: str,
-        color: str = None
+        response: HttpResponse = None
     ):
         self.type = type
         self.message = message
 
-        if color == None:
-            try:
-                self.color = COLORS[self.type]
-            except:
-                self.color = COLORS[0]
-        else:
-            self.color = color
+        if response != None:
+            self.cookie(
+                response
+            )
 
     def toJSON(
         self
     ) -> str:
+        """
+        Returns JSON string of own members
+        """
+
         return json.dumps(
             {
                 "type": self.type,
                 "message": self.message,
-                "color": self.color,
             }
         )
 
@@ -52,8 +48,13 @@ class message:
         self,
         response: HttpResponse
     ) -> None:
+        """
+        Adds message to Cookies as Session Cookie\n
+        Displayed on next page load by layout
+        """
+
         json = self.toJSON()
-        encode = parse.quote_plus(json)
+        encode = parse.quote(json)
 
         response.set_cookie(
             "message",
@@ -61,6 +62,5 @@ class message:
             None,
             None,
             "/",
-            "localhost"
+            settings.url
         )
-        response.cookies["message"] = encode
