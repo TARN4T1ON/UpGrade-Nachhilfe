@@ -2,7 +2,6 @@ from django.template import loader, Context, Template
 from django.http import HttpRequest, HttpResponse
 
 import page.globall as globall
-import page.settings as settings
 import page.views.status as status
 
 class view:
