@@ -13,7 +13,7 @@ instances = {
         "./index.html",
         "",
         [
-            "HOME"
+            "HOME",
         ]
     ),
     "about": about(
@@ -21,7 +21,7 @@ instances = {
         "./about.html",
         "about/",
         [
-            "ÜBER UNS"
+            "ÜBER UNS",
         ]
     ),
 
@@ -31,7 +31,7 @@ instances = {
         "user/register/",
         [
             "BENUTZER",
-            "REGISTRIEREN"
+            "REGISTRIEREN",
         ]
     ),
     "login": login(
@@ -40,7 +40,7 @@ instances = {
         "user/login/",
         [
             "BENUTZER",
-            "EINLOGGEN"
+            "EINLOGGEN",
         ]
     ),
     "logout": logout(
@@ -49,7 +49,7 @@ instances = {
         "user/logout/",
         [
             "BENUTZER",
-            "AUSLOGGEN"
+            "AUSLOGGEN",
         ]
     ),
 }
