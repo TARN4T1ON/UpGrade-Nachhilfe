@@ -2,7 +2,6 @@ import os
 
 import secrets
 
-import json
 import mimetypes
 
 from django.conf import settings
@@ -23,10 +22,6 @@ else:
     from page.settings.production import *
 
 BASE_DIR = globall.page
-
-ALLOWED_HOSTS = [
-    globall.url,
-]
 
 INSTALLED_APPS = [
     "django.contrib.auth",

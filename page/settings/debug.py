@@ -2,6 +2,14 @@ import os
 
 import page.globall as globall
 
+# >>>
+# Debug Setting Overrides
+# >>>
+
+ALLOWED_HOSTS = [
+    "*",
+]
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
