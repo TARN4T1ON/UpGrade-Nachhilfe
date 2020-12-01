@@ -34,7 +34,7 @@ for key in views.instances:
 
 # error handlers
 
-handler400 = "page.views.status.status.handler400"
-handler403 = "page.views.status.status.handler403"
-handler404 = "page.views.status.status.handler404"
-handler500 = "page.views.status.status.handler500"
+handler400 = "page.views.status.handler400"
+handler403 = "page.views.status.handler403"
+handler404 = "page.views.status.handler404"
+handler500 = "page.views.status.handler500"

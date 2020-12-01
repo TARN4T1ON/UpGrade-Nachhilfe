@@ -7,26 +7,7 @@ import mimetypes
 
 from django.conf import settings
 
-# >>>
-# Global
-# >>>
-
-# project root
-root = os.path.realpath(
-    os.path.dirname(
-        os.path.dirname(__file__)
-    )
-)
-
-# page root
-rootPage = os.path.realpath(
-    os.path.dirname(__file__)
-)
-
-url = "localhost"
-port = 8000
-
-separator = " :: "
+import page.globall as globall
 
 # >>>
 # Main
@@ -36,10 +17,15 @@ separator = " :: "
 SECRET_KEY = secrets.token_hex(64)
 DEBUG = True
 
-BASE_DIR = rootPage
+if DEBUG:
+    from page.settings.debug import *
+else:
+    from page.settings.production import *
+
+BASE_DIR = globall.page
 
 ALLOWED_HOSTS = [
-    url,
+    globall.url,
 ]
 
 INSTALLED_APPS = [
@@ -57,32 +43,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
-if DEBUG:
-    LOGGING = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "handlers": {
-            "file": {
-                "level": "DEBUG",
-                "class": "logging.FileHandler",
-                "filename": os.path.join(
-                    root,
-                    "log",
-                    "debug.log"
-                )
-            }
-        },
-        "loggers": {
-            "django": {
-                "handlers": [
-                    "file"
-                ],
-                "level": "DEBUG",
-                "propagate": True
-            }
-        },
-    }
-
 # >>>
 # Pages
 # >>>
@@ -94,16 +54,8 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(
-                rootPage,
-                "views"
-            ),
-            os.path.join(
-                rootPage,
-                "views/status"
-            ),
-            os.path.join(
-                rootPage,
-                "views/user"
+                globall.page,
+                "views/templates"
             ),
         ],
         "APP_DIRS": False,
@@ -122,44 +74,44 @@ SESSION_COOKIE_NAME = "session"
 # Database
 # >>>
 
-DATABASE_CONFIG = open(
-    os.path.join(
-        root,
-        "db",
-        "connection.json"
-    )
-)
-DATABASE_CONN = json.load(DATABASE_CONFIG)
-DATABASE_CONFIG.close()
+# DATABASE_CONFIG = open(
+#     os.path.join(
+#         root,
+#         "db",
+#         "connection.json"
+#     )
+# )
+# DATABASE_CONN = json.load(DATABASE_CONFIG)
+# DATABASE_CONFIG.close()
 
-DATABASE = {}
-DATABASE_KEY: str
-if DEBUG:
-    DATABASE_KEY = "DEVELOPMENT"
-else:
-    DATABASE_KEY = "PRODUCTION"
+# DATABASE = {}
+# DATABASE_KEY: str
+# if DEBUG:
+#     DATABASE_KEY = "DEVELOPMENT"
+# else:
+#     DATABASE_KEY = "PRODUCTION"
 
-for key in DATABASE_CONN["DEVELOPMENT"]:
-    value = DATABASE_CONN["DEVELOPMENT"][key]
+# for key in DATABASE_CONN["DEVELOPMENT"]:
+#     value = DATABASE_CONN["DEVELOPMENT"][key]
 
-    if value == None:
-        try:
-            value = DATABASE_CONN["DEFAULT"][key]
-        except:
-            continue
+#     if value == None:
+#         try:
+#             value = DATABASE_CONN["DEFAULT"][key]
+#         except:
+#             continue
 
-        if value == None:
-            continue
+#         if value == None:
+#             continue
 
-    DATABASE[key] = value
-
-DATABASES = {
-    "default": DATABASE
-}
+#     DATABASE[key] = value
 
 # >>>
 # User
 # >>>
+
+AUTHENTICATION_BACKENDS = [
+    "page.model.auth.email"
+]
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -175,13 +127,13 @@ PASSWORD_HASHERS = [
 STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(
-    rootPage, 
+    globall.page, 
     "_static"
 )
 
 STATICFILES_DIRS = [
     os.path.join(
-        rootPage,
+        globall.page,
         "static"
     ),
 ]

@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from page.views.view import view
 import page.views.message as message
 
+import page.views.user.validation as validation
+
 class register(view):
     def post(
         self,
@@ -14,42 +16,88 @@ class register(view):
     ) -> HttpResponse:
         response = HttpResponse()
 
-        username = request.POST["username"]
-        password = request.POST["password"]
+        errors = []
 
-        exists = User.objects.filter(
-            username = username
-        ).exists()
+        # get username, email and password from POST data
+
+        username = request.POST["username"]
+        validation.validateUsername(
+            username,
+            errors
+        )
+
+        email = request.POST["email"]
+        validation.validateEmail(
+            email,
+            errors
+        )
+
+        password = request.POST["password"]
+        validation.validatePassword(
+            password,
+            errors
+        )
 
         msg: message
-        if exists:
+
+        # check if validation error occurred
+
+        if len(errors) > 0:
+            _msg = validation.messageCompile(
+                errors
+            )
+
             msg = message.message(
                 message.types.ERROR.name,
-                "Dieser Benutzer existiert bereits!",
-                response
+                _msg,
+                response,
+                message.TIME * 2
             )
 
-            response["Location"] = self.url
-            response.status_code = 302
+            self.redirect(
+                response,
+                "/" + self.url
+            )
+
         else:
-            user: User = User.objects.create(
+            exists = User.objects.filter(
                 username = username
-            )
-            user.set_password(password)
-            user.save()
+            ).exists()
+            
+            if exists:
+                msg = message.message(
+                    message.types.ERROR.name,
+                    "Dieser Benutzer existiert bereits!",
+                    response
+                )
 
-            _login(
-                request,
-                user
-            )
+                self.redirect(
+                    response,
+                    "/" + self.url
+                )
+            else:
+                user: User = User.objects.create(
+                    username = username,
+                    email = email
+                )
+                user.set_password(password)
+                user.save()
 
-            msg = message.message(
-                message.types.SUCCESS.name,
-                "Erfolgreich registriert!",
-                response
-            )
+                # @TODO: email verification
 
-            response["Location"] = "/"
-            response.status_code = 302
+                _login(
+                    request,
+                    user
+                )
+
+                msg = message.message(
+                    message.types.SUCCESS.name,
+                    "Erfolgreich registriert!",
+                    response
+                )
+
+                self.redirect(
+                    response
+                )
 
         return response

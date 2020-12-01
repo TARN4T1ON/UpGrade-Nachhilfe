@@ -80,15 +80,15 @@
         <div id="nav-toggle">
             <img type="image/svg" src="/static/assets/nav.svg">
         </div>
-        <div id="message" class="message-container" data-type="ERROR" style="display: none;">
-            <div class="message-icon-container">
-                <img class="message-icon" data-type="SUCCESS" type="image/svg" src="/static/assets/icons/success.svg">
-                <img class="message-icon" data-type="WARNING" type="image/svg" src="/static/assets/icons/warning.svg">
-                <img class="message-icon" data-type="ERROR" type="image/svg" src="/static/assets/icons/error.svg">
-            </div>
-            <p class="message-text">Message</p>
-        </div>
     </header>
+    <div id="message" class="message-container" data-type="ERROR" style="display: none;">
+        <div class="message-icon-container">
+            <img class="message-icon" data-type="SUCCESS" type="image/svg" src="/static/assets/icons/success.svg">
+            <img class="message-icon" data-type="WARNING" type="image/svg" src="/static/assets/icons/warning.svg">
+            <img class="message-icon" data-type="ERROR" type="image/svg" src="/static/assets/icons/error.svg">
+        </div>
+        <p class="message-text">Message</p>
+    </div>
     <main>
         <!-- Main -->
         {% block main %}
@@ -96,7 +96,7 @@
     </main>
     <footer>
         <!-- @TODO: footer -->
-        
+        <p>Hier könnte etwas tolles stehen...</p>
     </footer>
 </body>
 

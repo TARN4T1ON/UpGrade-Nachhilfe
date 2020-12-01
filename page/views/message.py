@@ -4,26 +4,35 @@ from enum import Enum
 
 from django.http import HttpResponse
 
-from page import settings
+import page.globall as globall
+import page.settings as settings
 
 class types(Enum):
     SUCCESS = "SUCCESS"
     WARNING = "WARNING"
     ERROR = "ERROR"
 
+TIME: int = 7500
+
 class message:
     type: str
 
     message: str
 
+    time: int
+
     def __init__(
         self,
         type: str,
         message: str,
-        response: HttpResponse = None
+        response: HttpResponse = None,
+        time: int = TIME
     ):
         self.type = type
+
         self.message = message
+
+        self.time = time
 
         if response != None:
             self.cookie(
@@ -41,6 +50,7 @@ class message:
             {
                 "type": self.type,
                 "message": self.message,
+                "time": self.time,
             }
         )
 
@@ -62,5 +72,5 @@ class message:
             None,
             None,
             "/",
-            settings.url
+            globall.url
         )

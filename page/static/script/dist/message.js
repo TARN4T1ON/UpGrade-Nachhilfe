@@ -16,8 +16,8 @@ class message {
         this.handlers = {};
         this.type = null;
         this.message = null;
+        this.time = null;
         this.handleTimeout = null;
-        this.timeTimeout = 7500;
         var that = this;
         this.states["message"] = new state();
         this.handlers["message"] = {};
@@ -36,6 +36,9 @@ class message {
         if (value == null)
             return;
         else {
+            if (value.startsWith("\"") && value.endsWith("\"")) {
+                value = value.substring(1, value.length - 1);
+            }
             value = decodeURIComponent(value);
             cookieRemove("message");
         }
@@ -45,6 +48,7 @@ class message {
         var dictionary = JSON.parse(json);
         this.type = dictionary["type"];
         this.message = dictionary["message"];
+        this.time = dictionary["time"];
     }
     show() {
         var that = this;
@@ -54,10 +58,10 @@ class message {
         }
         this.handleTimeout = setTimeout(function () {
             that.hide();
-        }, this.timeTimeout);
+        }, this.time);
         this.elements.message.style.display = null;
         this.elements.message.dataset["type"] = this.type;
-        this.elements.text.innerText = this.message;
+        this.elements.text.innerHTML = this.message;
     }
     hide() {
         this.elements.message.style.display = "none";

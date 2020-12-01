@@ -18,9 +18,9 @@ class message {
 
     type: types = null;
     message: string = null;
+    time: number = null;
 
     handleTimeout: number = null;
-    timeTimeout: number = 7500;
 
     constructor() {
         var that = this;
@@ -57,6 +57,11 @@ class message {
         if (value == null) return;
         else
         {
+            if (value.startsWith("\"") && value.endsWith("\""))
+            {
+                value = value.substring(1, value.length - 1);
+            }
+
             value = decodeURIComponent(value);
 
             cookieRemove(
@@ -76,6 +81,7 @@ class message {
 
         this.type = dictionary["type"]
         this.message = dictionary["message"]
+        this.time = dictionary["time"];
     }
 
     show() {
@@ -91,13 +97,13 @@ class message {
             function () {
                 that.hide();
             },
-            this.timeTimeout
+            this.time
         );
 
         this.elements.message.style.display = null;
 
         this.elements.message.dataset["type"] = this.type;
-        this.elements.text.innerText = this.message;
+        this.elements.text.innerHTML = this.message;
     }
 
     hide() {

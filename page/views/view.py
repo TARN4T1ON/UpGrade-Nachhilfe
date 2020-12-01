@@ -1,6 +1,7 @@
 from django.template import loader, Context, Template
 from django.http import HttpRequest, HttpResponse
 
+import page.globall as globall
 import page.settings as settings
 import page.views.status as status
 
@@ -56,6 +57,26 @@ class view:
         """
 
         pass
+
+    def redirect(
+        self,
+        response: HttpResponse,
+        url: str = "/",
+        permanent: bool = False
+    ) -> None:
+        """
+        Adds Location Header and sets Status Code of Response, effectively redirecting
+        Parameters:\n
+            permanent: bool
+                Permanent (302) or Temporary (301) Redirect
+        """
+
+        response["Location"] = url
+
+        if permanent:
+            response.status_code = 302
+        else:
+            response.status_code = 301
 
     def handler(
         self, 
@@ -262,7 +283,9 @@ def _middleware(
     context["user"] = request.user.is_authenticated
     
     if self.title != "":
-        context["title"] = settings.separator + settings.separator.join(self.title)
+        context["title"] = globall.separator + globall.separator.join(
+            self.title
+        )
     else:
         context["title"] = ""
 

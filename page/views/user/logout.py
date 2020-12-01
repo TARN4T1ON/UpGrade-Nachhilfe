@@ -24,9 +24,9 @@ class logout(view):
                 response
             )
 
-            response["Location"] = "/"
-            response.status_code = 302
-            
+            self.redirect(
+                response
+            )
         else:
             msg = message.message(
                 message.types.ERROR.name,
@@ -34,7 +34,8 @@ class logout(view):
                 response
             )
 
-            response["Location"] = "/"
-            response.status_code = 302
+            self.redirect(
+                response
+            )
 
         return response

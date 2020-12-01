@@ -150,6 +150,10 @@ body {
 
 
 
+ul {
+    margin-left: 30px;
+}
+
 button {
     padding: var(--scale);
 
@@ -288,22 +292,20 @@ footer
 /* Message */
 
 .message-container {
-    width: 100%;
+    width: auto;
     max-width: calc(100% - var(--scale) * 2);
     height: auto;
 
     margin-top: var(--scale);
     margin-bottom: var(--scale);
 
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: var(--size-banner);
     left: 50%;
 
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
 
     transform: translateX(-50%);
 
@@ -363,6 +365,12 @@ footer
 
     .message-text {
         padding: var(--scale-large);
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
     }
 
 /* Logo */
@@ -411,10 +419,11 @@ footer
     .logo-container-simple .separator-tiny
     {
         margin-left: var(--scale-tiny);
-        margin-right: var(--scale-tiny);
     }
 
     .logo-text {
+        --_scale-logo-text: 48px;
+
         width: auto;
         height: 100%;
 
@@ -435,7 +444,7 @@ footer
         .logo-text p:first-child {
             padding-bottom: 4px;
 
-            font-size: calc(48px * (3 / 5) - 4px);
+            font-size: calc(var(--_scale-logo-text) * (3 / 5) - 4px);
             font-weight: bold;
         }
 
@@ -444,7 +453,7 @@ footer
             }
 
         .logo-text p:last-child {
-            font-size: calc(48px * (2 / 5));
+            font-size: calc(var(--_scale-logo-text) * (2 / 5));
         }
 
             .logo-container-simple .logo-text p:last-child {

@@ -36,7 +36,7 @@
         height: calc(100vh - var(--size-banner));
     }
 
-    .promo-container:nth-child(2n) {
+    .promo-container:nth-of-type(2n) {
         color: var(--color-white);
         background-color: var(--color-accent-dark);
     }

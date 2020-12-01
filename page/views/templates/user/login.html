@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block main %}
+<!-- @TODO: frontend validation -->
 <div class="promo-container promo-container-fill">
-    <form style="display: grid; grid-template-columns: min-content auto; grid-gap: var(--scale-large);" action="/user/register/" method="post">
-        <p style="grid-column: 1 / 3;">Benutzername</p>
+    <form style="display: grid; grid-template-columns: min-content auto; grid-gap: var(--scale-large);" action="/user/login/" method="post">
+        <p style="grid-column: 1 / 3;">Benutzername / E-Mail</p>
         <img type="image/svg" src="/static/assets/icons/tag.svg">
         <input type="text" name="username" autocomplete="username">
         <p style="grid-column: 1 / 3;">Passwort</p>
         <img type="image/svg" src="/static/assets/icons/key.svg">
         <input type="password" name="password" autocomplete="current-password">
-        <button class="button button-highlight button-center" style="grid-column: 1 / 3;" type="submit">REGISTRIEREN</button>
-        <p style="grid-column: 1 / 3; text-align: center;">Bereits ein Benutzer? <a class="button" style="padding: var(--scale); display: inline-flex;" href="/user/login/">Einloggen</a></p>
+        <button class="button button-highlight button-center" style="grid-column: 1 / 3;" type="submit">EINLOGGEN</button>
+        <p style="grid-column: 1 / 3; text-align: center;">Noch kein Benutzer? <a class="button" style="padding: var(--scale); display: inline-flex;" href="/user/register/">Registrieren</a></p>
     </form>
 </div>
 {% endblock %}

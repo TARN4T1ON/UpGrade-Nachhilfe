@@ -3,7 +3,8 @@ import sys
 
 from django.core.management import execute_from_command_line
 
-from page import settings
+import page.globall as globall
+import page.settings.settings as settings
 
 # @TODO: comment
 
@@ -18,14 +19,14 @@ def main() -> None:
 
     os.environ.setdefault(
         "DJANGO_SETTINGS_MODULE",
-        "page.settings"
+        "page.settings.settings"
     )
 
     # find static files, move into static_root
 
     execute_from_command_line(
         [
-            settings.rootPage,
+            globall.page,
             "findstatic",
         ] + settings.STATICFILES_DIRS
     )
@@ -34,12 +35,12 @@ def main() -> None:
 
     execute_from_command_line(
         [
-            settings.rootPage,
+            globall.page,
             "runserver",
             "--insecure",
             "%s:%s" % (
-                settings.url, 
-                settings.port
+                globall.url, 
+                globall.port
             ),
         ]
     )
