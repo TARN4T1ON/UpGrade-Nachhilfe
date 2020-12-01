@@ -1,9 +1,0 @@
-{
-    "brace_style": "expand",
-    "preserve_newlines": true,
-    "max_preserve_newlines": 3,
-    "indent_char": " ",
-    "indent_size": 4,
-    "indent_empty_lines": true,
-    "css": []
-}
