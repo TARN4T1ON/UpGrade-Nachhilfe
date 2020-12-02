@@ -16,7 +16,7 @@
 <body>
     <header>
         <a class="logo-container" href="/">
-            <img class="logo" type="image/svg" src="/static/assets/logo.svg">
+            <img class="logo" type="image/svg+xml" src="/static/assets/logo.svg">
             <div class="separator-vertical separator-tinym"></div>
             <div class="separator-vertical separator-tiny"></div>
             <div class="logo-text">
@@ -26,34 +26,34 @@
         </a>
         <nav>
             <a class="button button-highlight" href="/">
-                <img type="image/svg" src="/static/assets/icons/home.svg">
+                <img type="image/svg+xml" src="/static/assets/icons/home.svg">
                 <p>HOME</p>
             </a>
             <div class="dropdown-container">
                 <a class="button button-highlight">
-                    <img type="image/svg" src="/static/assets/icons/user.svg">
+                    <img type="image/svg+xml" src="/static/assets/icons/user.svg">
                     <p>BENUTZER</p>
-                    <img class="dropdown-triangle" type="image/svg" src="/static/assets/icons/triangle.svg">
+                    <img class="dropdown-triangle" type="image/svg+xml" src="/static/assets/icons/triangle.svg">
                 </a>
                 {% if user %}
                 <div class="dropdown nav">
                     <a class="button">
-                        <img type="image/svg" src="/static/assets/icons/placeholder.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/placeholder.svg">
                         <p>PROFIL</p>
                     </a>
                     <a class="button" href="/user/logout/">
-                        <img type="image/svg" src="/static/assets/icons/logout.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/logout.svg">
                         <p>AUSLOGGEN</p>
                     </a>
                 </div>
                 {% else %}
                 <div class="dropdown nav">
                     <a class="button" href="/user/login/">
-                        <img type="image/svg" src="/static/assets/icons/login.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/login.svg">
                         <p>ANMELDEN</p>
                     </a>
                     <a class="button" href="/user/register/">
-                        <img type="image/svg" src="/static/assets/icons/register.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/register.svg">
                         <p>REGISTRIEREN</p>
                     </a>
                 </div>
@@ -61,31 +61,31 @@
             </div>
             <div class="dropdown-container">
                 <a class="button button-highlight">
-                    <img type="image/svg" src="/static/assets/icons/context.svg">
+                    <img type="image/svg+xml" src="/static/assets/icons/context.svg">
                     <p>EXTRA</p>
-                    <img class="dropdown-triangle" type="image/svg" src="/static/assets/icons/triangle.svg">
+                    <img class="dropdown-triangle" type="image/svg+xml" src="/static/assets/icons/triangle.svg">
                 </a>
                 <div class="dropdown nav">
                     <a class="button" href="/about/">
-                        <img type="image/svg" src="/static/assets/icons/info.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/info.svg">
                         <p>ÜBER UNS</p>
                     </a>
                     <a class="button" href="/support/">
-                        <img type="image/svg" src="/static/assets/icons/wrench.svg">
+                        <img type="image/svg+xml" src="/static/assets/icons/wrench.svg">
                         <p>SUPPORT</p>
                     </a>
                 </div>
             </div>
         </nav>
         <div id="nav-toggle">
-            <img type="image/svg" src="/static/assets/nav.svg">
+            <img type="image/svg+xml" src="/static/assets/nav.svg">
         </div>
     </header>
     <div id="message" class="message-container" data-type="ERROR" style="display: none;">
         <div class="message-icon-container">
-            <img class="message-icon" data-type="SUCCESS" type="image/svg" src="/static/assets/icons/success.svg">
-            <img class="message-icon" data-type="WARNING" type="image/svg" src="/static/assets/icons/warning.svg">
-            <img class="message-icon" data-type="ERROR" type="image/svg" src="/static/assets/icons/error.svg">
+            <img class="message-icon" data-type="SUCCESS" type="image/svg+xml" src="/static/assets/icons/success.svg">
+            <img class="message-icon" data-type="WARNING" type="image/svg+xml" src="/static/assets/icons/warning.svg">
+            <img class="message-icon" data-type="ERROR" type="image/svg+xml" src="/static/assets/icons/error.svg">
         </div>
         <p class="message-text">Message</p>
     </div>
