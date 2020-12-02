@@ -37,7 +37,8 @@ def main() -> None:
         [
             globall.page,
             "runserver",
-            "--insecure",
+            # "--insecure",
+            "--noreload",
             "%s:%s" % (
                 globall.url, 
                 globall.port

@@ -1,16 +1,18 @@
-const utc = "Thu, 01 Jan 1970 00:00:00 UTC";
+const _path = "/";
+const _domain = location.hostname;
 
 function cookieRemove(
     key: string,
-    path: string = "/"
+    path: string = _path,
+    domain: string = _domain
 ) {
     var _path: string = "";
-    if (path != null)
-    {
-        _path = `path=${path};`;
-    }
+    if (path != null) _path = `path=${path};`;
 
-    document.cookie = `${key}=;expires=${utc};${_path}`;
+    var _domain: string = "";
+    if (domain != null) _domain = `domain=${domain};`
+
+    document.cookie = `${key}=;max-age=0;${_path}${_domain}`;
 }
 
 function cookieGet(
@@ -31,8 +33,8 @@ function cookieSet(
     value: string,
     maxAge: number = null,
     expires: string = null,
-    path: string = null,
-    domain: string = null
+    path: string = _path,
+    domain: string = _domain
 ) {
     var _maxAge: string = "";
     if (maxAge != null) _maxAge = `max-age=${maxAge};`;

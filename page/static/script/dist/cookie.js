@@ -1,10 +1,13 @@
-const utc = "Thu, 01 Jan 1970 00:00:00 UTC";
-function cookieRemove(key, path = "/") {
+const _path = "/";
+const _domain = location.hostname;
+function cookieRemove(key, path = _path, domain = _domain) {
     var _path = "";
-    if (path != null) {
+    if (path != null)
         _path = `path=${path};`;
-    }
-    document.cookie = `${key}=;expires=${utc};${_path}`;
+    var _domain = "";
+    if (domain != null)
+        _domain = `domain=${domain};`;
+    document.cookie = `${key}=;max-age=0;${_path}${_domain}`;
 }
 function cookieGet(key) {
     var match = document.cookie.match(new RegExp(`${key}=(.+);?`));
@@ -13,7 +16,7 @@ function cookieGet(key) {
     else
         return null;
 }
-function cookieSet(key, value, maxAge = null, expires = null, path = null, domain = null) {
+function cookieSet(key, value, maxAge = null, expires = null, path = _path, domain = _domain) {
     var _maxAge = "";
     if (maxAge != null)
         _maxAge = `max-age=${maxAge};`;
